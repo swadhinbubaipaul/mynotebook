@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
@@ -22,8 +23,8 @@ router.post(
 				.send({ success: false, errors: errors.array() });
 		}
 
-		// Check whether the user with this email exists already
 		try {
+			// Check whether the user with this email exists already
 			let user = await User.findOne({ email: req.body.email });
 			if (user) {
 				return res.status(400).json({
@@ -32,21 +33,38 @@ router.post(
 				});
 			}
 
-			// Create a new user
-			user = new User({
-				name: req.body.name,
-				password: req.body.password,
-				email: req.body.email,
-			});
+			const plaintextPassword = req.body.password;
+			const saltRounds = 10;
+			bcrypt.hash(
+				plaintextPassword,
+				saltRounds,
+				async function (err, hash) {
+					// Store hash in your password DB.
+					// Create a new user
+					if (err) {
+						console.error("err");
+						res.status(500).json({
+							success: false,
+							error: "Some error occured",
+						});
+					} else {
+						user = new User({
+							name: req.body.name,
+							password: hash,
+							email: req.body.email,
+						});
 
-			// Save it in db
-			await user.save();
+						// Save it in db
+						await user.save();
 
-			res.json({
-				success: true,
-				message: "User created",
-				user: user,
-			});
+						res.json({
+							success: true,
+							message: "User created",
+							user: user,
+						});
+					}
+				}
+			);
 		} catch (error) {
 			console.error(error.message);
 			res.status(500).json({
