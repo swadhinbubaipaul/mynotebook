@@ -33,11 +33,15 @@ router.post(
 			}
 
 			// Create a new user
-			user = await User.create({
+			user = new User({
 				name: req.body.name,
 				password: req.body.password,
 				email: req.body.email,
 			});
+
+			// Save it in db
+			await user.save();
+
 			res.json({
 				success: true,
 				message: "User created",
