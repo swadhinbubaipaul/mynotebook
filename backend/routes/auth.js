@@ -4,7 +4,7 @@ const User = require("../models/User");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 var jwt = require("jsonwebtoken");
-const fetchUser = require("../middleware/fetchUser");
+const auth = require("../middleware/auth");
 
 const JWT_SECRET = "Swadhinisagoodboy$";
 
@@ -128,11 +128,14 @@ router.post(
 );
 
 // ROUTE 3: Get logged in User details using POST "/api/auth/getuser". Login required
-router.post("/getuser", fetchUser, async (req, res) => {
+router.post("/getuser", auth, async (req, res) => {
 	try {
 		const userId = req.user.id;
 		const user = await User.findById(userId).select("-password");
-		res.send(user);
+		res.json({
+			success: true,
+			user: user,
+		});
 	} catch (error) {
 		console.error(error.message);
 		res.status(500).json({
