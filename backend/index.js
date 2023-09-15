@@ -13,7 +13,7 @@ app.use("/api/notes", require("./routes/notes"));
 app.listen(port, async () => {
 	try {
 		await connectToMongo();
-		console.log(`App listening on http://localhost:${port}`);
+		console.log(`Mynotebook listening at http://localhost:${port}`);
 	} catch (err) {
 		console.log(err);
 	}
