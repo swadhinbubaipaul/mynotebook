@@ -17,7 +17,7 @@ const AddNote = () => {
 	return (
 		<div className="container my-3">
 			<h2>Add a Note</h2>
-			<form>
+			<form autoComplete="off">
 				<div className="mb-3">
 					<label htmlFor="title" className="form-label">
 						Title
@@ -43,6 +43,19 @@ const AddNote = () => {
 						name="description"
 						onChange={onChange}
 						value={note.description}
+					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="tag" className="form-label">
+						Tag
+					</label>
+					<input
+						type="text"
+						className="form-control"
+						id="tag"
+						name="tag"
+						onChange={onChange}
+						value={note.tag}
 					/>
 				</div>
 				<button

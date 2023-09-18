@@ -7,12 +7,6 @@ const auth = require("../middleware/auth");
 // ROUTE 1: Get all the notes using GET "/api/notes/fetchallnotes". Login required
 router.get("/fetchallnotes", auth, async (req, res) => {
 	const notes = await Notes.find({ user: req.user.id });
-	if (notes.length === 0) {
-		return res.status(404).json({
-			success: false,
-			error: "404 not found",
-		});
-	}
 
 	res.json({
 		success: true,
