@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import NoteContext from "../context/notes/NoteContext";
 
-const NoteItem = ({ note }) => {
+const NoteItem = ({ note, updateNote }) => {
 	const { deleteNote } = useContext(NoteContext);
+
 	return (
 		<div className="w-25 my-3">
 			<div className="card">
@@ -22,7 +23,14 @@ const NoteItem = ({ note }) => {
 									deleteNote(note._id);
 								}}
 							></i>
-							<i className="fa-regular fa-pen-to-square mx-2"></i>
+							<i
+								className="fa-regular fa-pen-to-square mx-2"
+								data-bs-toggle="modal"
+								data-bs-target="#editNoteModal"
+								onClick={() => {
+									updateNote(note);
+								}}
+							></i>
 						</div>
 					</div>
 				</div>

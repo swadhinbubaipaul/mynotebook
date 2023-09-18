@@ -73,13 +73,15 @@ const NoteState = (props) => {
 		console.log(response);
 		if (response.success === true) {
 			// Logic to edit in client
-			for (const note of notes) {
+			const newNotes = notes.map((note) => {
 				if (note._id === id) {
-					note.title = title;
-					note.description = description;
-					note.tag = tag;
+					return response.note;
+				} else {
+					return note;
 				}
-			}
+			});
+			console.log(newNotes);
+			setNotes(newNotes);
 		}
 	};
 
@@ -93,7 +95,6 @@ const NoteState = (props) => {
 };
 
 async function apiCall(url, method, authToken, data) {
-	// Default options are marked with *
 	const response = await fetch(url, {
 		method: method,
 		headers: {
