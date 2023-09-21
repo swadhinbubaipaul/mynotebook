@@ -29,7 +29,7 @@ const NoteState = (props) => {
 			{
 				title,
 				description,
-				tag: tag.length === 0 ? "General" : tag,
+				tag: tag.length === 0 ? undefined : tag,
 			}
 		);
 		console.log(response);

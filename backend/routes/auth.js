@@ -95,7 +95,7 @@ router.post(
 
 			// Check whether the user with this email exists already
 			let user = await User.findOne({ email });
-			if (!user && !(await bcrypt.compare(password, user.password))) {
+			if (!user || !(await bcrypt.compare(password, user.password))) {
 				return res.status(400).json({
 					success: false,
 					error: "Please try to login with correct credentials",

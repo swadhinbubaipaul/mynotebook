@@ -10,6 +10,7 @@ const Notes = () => {
 
 	useEffect(() => {
 		getNotes();
+		// eslint-disable-next-line
 	}, []);
 
 	const updateNote = (currentNote) => {
@@ -22,6 +23,9 @@ const Notes = () => {
 			<EditNoteModal note={note} setNote={setNote} />
 			<div className="row my-3">
 				<h2>Your Notes</h2>
+				{notes.length === 0 && (
+					<p className="fs-5">No Notes to display</p>
+				)}
 				{notes.map((note) => {
 					return (
 						<NoteItem

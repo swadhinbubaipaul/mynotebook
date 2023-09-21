@@ -6,7 +6,7 @@ const AddNote = () => {
 
 	const [note, setNote] = useState({ title: "", description: "", tag: "" });
 
-	const handleClick = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		addNote(note.title, note.description, note.tag);
 		setNote({ title: "", description: "", tag: "" });
@@ -17,7 +17,7 @@ const AddNote = () => {
 	return (
 		<div className="container my-3">
 			<h2>Add a Note</h2>
-			<form autoComplete="off">
+			<form onSubmit={handleSubmit} autoComplete="off">
 				<div className="mb-3">
 					<label htmlFor="title" className="form-label">
 						Title
@@ -30,6 +30,8 @@ const AddNote = () => {
 						name="title"
 						onChange={onChange}
 						value={note.title}
+						minLength={3}
+						required
 					/>
 				</div>
 				<div className="mb-3">
@@ -43,6 +45,8 @@ const AddNote = () => {
 						name="description"
 						onChange={onChange}
 						value={note.description}
+						minLength={5}
+						required
 					/>
 				</div>
 				<div className="mb-3">
@@ -58,11 +62,7 @@ const AddNote = () => {
 						value={note.tag}
 					/>
 				</div>
-				<button
-					type="submit"
-					className="btn btn-primary"
-					onClick={handleClick}
-				>
+				<button type="submit" className="btn btn-primary">
 					Add Note
 				</button>
 			</form>
