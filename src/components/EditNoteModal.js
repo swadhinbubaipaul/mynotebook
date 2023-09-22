@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import NoteContext from "../context/notes/NoteContext";
 
-const EditNoteModal = ({ note, setNote }) => {
+const EditNoteModal = ({ note, setNote, showAlert }) => {
 	const { editNote } = useContext(NoteContext);
 
 	const handleClick = (e) => {
 		e.preventDefault();
 		editNote(note._id, note.title, note.description, note.tag);
 		setNote({ title: "", description: "", tag: "" });
+		showAlert("Note Updated Successfully", "success");
 	};
 
 	const onChange = (e) => {

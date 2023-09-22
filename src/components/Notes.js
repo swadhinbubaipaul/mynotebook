@@ -4,7 +4,7 @@ import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
 import EditNoteModal from "./EditNoteModal";
 
-const Notes = () => {
+const Notes = ({ showAlert }) => {
 	const [note, setNote] = useState({ title: "", description: "", tag: "" });
 	const { notes, getNotes } = useContext(NoteContext);
 
@@ -19,8 +19,12 @@ const Notes = () => {
 
 	return (
 		<>
-			<AddNote />
-			<EditNoteModal note={note} setNote={setNote} />
+			<AddNote showAlert={showAlert} />
+			<EditNoteModal
+				note={note}
+				setNote={setNote}
+				showAlert={showAlert}
+			/>
 			<div className="row my-3">
 				<h2>Your Notes</h2>
 				{notes.length === 0 && (
@@ -32,6 +36,7 @@ const Notes = () => {
 							key={note._id}
 							note={note}
 							updateNote={updateNote}
+							showAlert={showAlert}
 						/>
 					);
 				})}
