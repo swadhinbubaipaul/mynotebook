@@ -11,7 +11,7 @@ const NoteState = (props) => {
 		const response = await apiCall(
 			`${host}/api/notes/fetchallnotes`,
 			"GET",
-			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRlZGEwYzRiZmMyNGUzZWM2MzRjMjRmIn0sImlhdCI6MTY5MzMxMjQ4MH0.bCgl8uh616FAraQc_R3PQYiOaL2d6WnEz1a_cxE_8VA"
+			localStorage.getItem("token")
 		);
 		console.log(response);
 		if (response.success === true) {
@@ -25,7 +25,7 @@ const NoteState = (props) => {
 		const response = await apiCall(
 			`${host}/api/notes/addnote`,
 			"POST",
-			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRlZGEwYzRiZmMyNGUzZWM2MzRjMjRmIn0sImlhdCI6MTY5MzMxMjQ4MH0.bCgl8uh616FAraQc_R3PQYiOaL2d6WnEz1a_cxE_8VA",
+			localStorage.getItem("token"),
 			{
 				title,
 				description,
@@ -45,7 +45,7 @@ const NoteState = (props) => {
 		const response = await apiCall(
 			`${host}/api/notes/deletenote/${id}`,
 			"DELETE",
-			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRlZGEwYzRiZmMyNGUzZWM2MzRjMjRmIn0sImlhdCI6MTY5MzMxMjQ4MH0.bCgl8uh616FAraQc_R3PQYiOaL2d6WnEz1a_cxE_8VA"
+			localStorage.getItem("token")
 		);
 		console.log(response);
 		if (response.success === true) {
@@ -63,7 +63,7 @@ const NoteState = (props) => {
 		const response = await apiCall(
 			`${host}/api/notes/updatenote/${id}`,
 			"PUT",
-			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRlZGEwYzRiZmMyNGUzZWM2MzRjMjRmIn0sImlhdCI6MTY5MzMxMjQ4MH0.bCgl8uh616FAraQc_R3PQYiOaL2d6WnEz1a_cxE_8VA",
+			localStorage.getItem("token"),
 			{
 				title,
 				description,
